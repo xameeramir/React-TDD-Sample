@@ -16,7 +16,7 @@ const Congrats = (props) => {
 }
 
 Congrats.propTypes = {
-    success: PropTypes.bool
+    success: React.PropTypes.bool
 };
 
 export default Congrats;
