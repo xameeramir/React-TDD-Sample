@@ -15,27 +15,31 @@ const setupGuessedWordsComponent = (props = {}) => {
     return shallow(<GuessedWords {...setupProps} />);
 }
 
-test('does not throw warning with expected props', () => {
-    checkProps(GuessedWords, defaultProps);
-})
-
 describe('Guessed words component tests', () => {
-    // test('renders without error', () => {
-    //     const wrapper = setupCongratsComponent({ success: false });
-    //     const component = findByTestAttr(wrapper, 'component-congrats');
-    //     expect(component.length).toBe(1)
-    // });
 
-    // test('renders no text when success prop is false', () => {
-    //     const wrapper = setupCongratsComponent({ success: false });
-    //     const message = findByTestAttr(wrapper, 'congrats-message');
-    //     expect(message.length).toBe(0);
-    // });
+    test('does not throw warning with expected props', () => {
+        checkProps(GuessedWords, defaultProps);
+    });
 
-    // test('renders non-empty congrats message when success prop is true', () => {
-    //     const wrapper = setupCongratsComponent({ success: true });
-    //     const message = findByTestAttr(wrapper, 'congrats-message');
-    //     expect(message.text().length).not.toBe(0);
-    // });
+    describe('if there are no words guessed', () => {
 
+        let wrapper;
+        beforeEach(() => {
+            wrapper = setupGuessedWordsComponent({ guessedWords: [] });
+        });
+
+        test('renders without error', () => {
+            const component = findByTestAttr(wrapper, 'component-guessed-words');
+            expect(component.length).toBe(1)
+        });
+
+        test('renders instructions to guess a word', () => {
+            const message = findByTestAttr(wrapper, 'guess-instructions');
+            expect(message.text().length).not.toBe(0);
+        });
+    });
+
+    describe('if there are words guessed', () => {
+
+    });
 });
